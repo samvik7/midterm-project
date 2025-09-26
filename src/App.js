@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GameContext } from './contexts/GameContext';
+import StartScreen from './components/StartScreen';
+import GameScreen from './components/GameScreen';
+import EndScreen from './components/EndScreen';
+import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Aswang Hunter</h1>
-    </div>
-  );
+  const { gameState } = useContext(GameContext);
+
+  if (!gameState.playerName) {
+    return <StartScreen />;
+  } else if (gameState.isGameEnded) {
+    return <EndScreen />;
+  } else {
+    return <GameScreen />;
+  }
 }
 
 export default App;
